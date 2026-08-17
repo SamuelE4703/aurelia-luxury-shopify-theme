@@ -1,0 +1,38 @@
+<header class="site-header">
+  <div class="container site-header__inner">
+    <button class="menu-toggle" data-menu-toggle aria-label="Open menu">Menu</button>
+
+    <a class="site-header__logo" href="{{ routes.root_url }}">{{ shop.name }}</a>
+
+    <nav class="desktop-nav" aria-label="Main navigation">
+      {% for link in linklists[section.settings.menu].links %}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+    </nav>
+
+    <div class="site-header__actions">
+      <a href="{{ routes.search_url }}" aria-label="Search">Search</a>
+      <button type="button" data-cart-open aria-label="Open bag">Bag (<span data-cart-count>{{ cart.item_count }}</span>)</button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" data-mobile-nav>
+    {% for link in linklists[section.settings.menu].links %}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    {% endfor %}
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_background }}">
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} — {{ current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} — Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} — {{ shop.name }}{% endunless -%}
+    </title>
+
+    {{ content_for_header }}
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  </head>
+
+  <body>
+    {% section 'header' %}
+
+    <main id="MainContent" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+
+    <div class="cart-drawer" data-cart-drawer aria-hidden="true">
+      <div class="cart-drawer__overlay" data-cart-close></div>
+      <aside class="cart-drawer__panel">
+        <div class="cart-drawer__header">
+          <h2>Bag</h2>
+          <button type="button" class="icon-button" data-cart-close aria-label="Close bag">×</button>
+        </div>
+        <div class="cart-drawer__body" data-cart-body>
+          <p>Your bag is empty.</p>
+        </div>
+      </aside>
+    </div>
+  </body>
+</html>

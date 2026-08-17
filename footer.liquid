@@ -1,0 +1,42 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <p class="eyebrow">{{ shop.name }}</p>
+      <p>Quiet luxury, considered design.</p>
+    </div>
+
+    <div>
+      <p class="eyebrow">Explore</p>
+      {% for link in linklists[section.settings.menu].links %}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+    </div>
+
+    <div>
+      <p class="eyebrow">Newsletter</p>
+      {% form 'customer', class: 'newsletter-form' %}
+        <input type="email" name="contact[email]" placeholder="Email address" required>
+        <button type="submit">Join</button>
+      {% endform %}
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+    <span>Shopify theme demo</span>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Footer menu",
+      "default": "footer"
+    }
+  ]
+}
+{% endschema %}
